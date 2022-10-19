@@ -1,0 +1,42 @@
+{
+    "name": "badinansoft/nova-language-switch",
+    "description": "A Laravel Nova package to switch language in your application",
+    "keywords": [
+        "laravel",
+        "nova",
+        "language",
+        "switch",
+        "translation",
+        "i18n"
+    ],
+    "homepage": "https://github.com/badinansoft/nova-language-switch",
+    "authors": [
+        {
+            "name": "Shahab Zebari",
+            "email": "me@shahabzebari.net",
+            "homepage": "https://shahabzebari.net",
+            "role": "Developer"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.3|^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Badinansoft\\LanguageSwitch\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Badinansoft\\LanguageSwitch\\ToolServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
