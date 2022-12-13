@@ -12,7 +12,7 @@ class LanguageController
     {
         $languages = config('nova-language-switch.supported-languages');
         if (array_key_exists($lang, $languages)) {
-            $key = auth()->id().'.locale';
+            $key = auth()->guard(config('nova.guard'))->id().'.locale';
             Cache::forever($key, $lang);
             app()->setLocale($lang);
         }
