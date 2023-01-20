@@ -6,7 +6,7 @@
     >
 
       <Icon type="language"  />
-      <span class="ml-1 font-bold">{{selectedDisplay}}</span>
+      <span class="ml-1 font-bold hidden md:inline">{{selectedDisplay}}</span>
     </DropdownTrigger>
     <template #menu>
       <DropdownMenu>
