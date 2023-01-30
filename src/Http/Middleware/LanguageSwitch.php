@@ -21,7 +21,7 @@ class LanguageSwitch
     {
         $lang = Cache::get(auth()->guard(config('nova.guard'))->id().'.locale');
         if ($lang) {
-            app()->setLocale($lang);
+            app()->setLocale(strtolower($lang));
             if (in_array($lang,config('nova-language-switch.rtl-languages'), true)) {
                 Nova::enableRTL();
             }
