@@ -13,10 +13,12 @@ class LanguageSwitch extends Tool
     {
         Nova::script('language-switch', __DIR__.'/../dist/js/tool.js');
         Nova::provideToScript([
-            'nova_language_switcher' => [
-                'languages' => config('nova-language-switch.supported-languages'),
-                'current_lang' => app()->getLocale(),
-            ],
+            'nova_language_switcher' => function() {
+                return [
+                    'languages' => config('nova-language-switch.supported-languages'),
+                    'current_lang' => app()->getLocale(),
+                ];
+            }
         ]);
     }
 
