@@ -1,4 +1,7 @@
+
 ## A Laravel Nova Tool to add language switcher to your application
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/badinansoft/nova-language-switch.svg?style=flat-square)](https://packagist.org/packages/badinansoft/nova-language-switch)
+[![Total Downloads](https://img.shields.io/packagist/dt/badinansoft/nova-language-switch.svg?style=flat-square)](https://packagist.org/packages/badinansoft/nova-language-switch)
 
 This [Nova](https://nova.laravel.com) tool lets you:
   - Add a Language switcher to the header of the nova application.
