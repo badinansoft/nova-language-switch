@@ -2,6 +2,7 @@
 
 namespace Badinansoft\LanguageSwitch\Http\Middleware;
 
+use Badinansoft\LanguageSwitch\Helper\LanguageHelper;
 use Cache;
 use Closure;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class LanguageSwitch
         $lang = Cache::get(auth()->guard(config('nova.guard'))->id().'.locale');
         if ($lang) {
             app()->setLocale($lang);
-            if (in_array($lang,config('nova-language-switch.rtl-languages'), true)) {
+            if (in_array($lang,LanguageHelper::getRTLLanguages(), true)) {
                 Nova::enableRTL();
             }
         }

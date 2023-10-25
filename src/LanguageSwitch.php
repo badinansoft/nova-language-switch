@@ -2,6 +2,7 @@
 
 namespace Badinansoft\LanguageSwitch;
 
+use Badinansoft\LanguageSwitch\Helper\LanguageHelper;
 use Illuminate\Http\Request;
 use Laravel\Nova\Nova;
 use Laravel\Nova\Tool;
@@ -15,7 +16,7 @@ class LanguageSwitch extends Tool
         Nova::provideToScript([
             'nova_language_switcher' => function() {
                 return [
-                    'languages' => config('nova-language-switch.supported-languages'),
+                    'languages' => LanguageHelper::getSupportedLanguages(),
                     'current_lang' => app()->getLocale(),
                 ];
             }
