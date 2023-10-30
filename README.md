@@ -5,7 +5,7 @@
 
 This [Nova](https://nova.laravel.com) tool lets you:
   - Add a Language switcher to the header of the nova application.
-  - Handle Switch language and put the current locale to Laravel cache to remember language from multiple browsers.
+  - Handle Switch language and put the current locale to Laravel session to remember language from multiple browsers.
   - Switch the direction of the application based on the RTL-supported application written in config.
  
  ## Requirements
@@ -16,7 +16,7 @@ This [Nova](https://nova.laravel.com) tool lets you:
 
 ## Features
 - Add multiple languages from the config.
-- Remember set local based on cache no need to save in the database table
+- Remember set local based on session no need to save in the database table
 -  Auto inject to the header of the application 
 - Just 4 steps to setup
 
