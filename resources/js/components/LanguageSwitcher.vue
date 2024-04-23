@@ -2,7 +2,7 @@
   <Dropdown placement="bottom-end">
     <DropdownTrigger
         :show-arrow="false"
-        class="h-10 w-full hover:text-primary-500"
+        class="h-10 w-full hover:text-primary-500 flex items-center"
     >
 
       <Icon type="language"  />
