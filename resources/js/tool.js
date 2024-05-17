@@ -17,21 +17,29 @@ Nova.booting((app, store) => {
                 const container = document.createElement('div')
                 container.className = 'relative z-50';
 
-                const vnode = createVNode(LanguageSwitcher, {
-                    langs: languages,
-                    selectedDisplay:languages[selected],
-                    selected:selected
-                })
-
-                vnode.appContext = app._context
-                render(vnode, container)
-
                 const element = this._.vnode.el.querySelector('header > div:last-child > div:last-child > div');
                 if (element) {
+                    const vnode = createVNode(LanguageSwitcher, {
+                        langs: languages,
+                        selectedDisplay:languages[selected],
+                        selected:selected
+                    })
+
+                    vnode.appContext = app._context
+                    render(vnode, container)
+        
                     element.insertAdjacentElement('beforebegin', container)
+
+                    this.toDestroy.push(container)
                 }
             }
-        }
+        },
+        unmounted() {
+            for (const element of this.toDestroy) {
+                render(null, element)
+            }
+
+        },
     })
 })
 

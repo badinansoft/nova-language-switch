@@ -30,7 +30,7 @@ import { Button } from 'laravel-nova-ui'
 
 export default {
   name: "LanguageSwitcher",
-  components: { Button, Icon },
+  components: { Button },
   props: [ 'langs', 'selected', 'selectedDisplay' ],
   methods:{
     changeLang(key) {
