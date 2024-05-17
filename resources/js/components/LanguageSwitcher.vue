@@ -40,12 +40,6 @@ export default {
         });
       }
     },
-  },
-  computed: {
-    languageIcon() {
-      return 'sun';
-    }
-
   }
 
 }
