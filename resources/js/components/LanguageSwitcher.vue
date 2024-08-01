@@ -1,8 +1,6 @@
 <template>
   <Dropdown placement="bottom-end" class="relative">
-    <Button variant="action" icon="globe-alt" class="text-primary-500 md:w-24" >
-      <span class="hidden md:inline">{{ selectedDisplay }}</span>
-    </Button>
+    <Button variant="action" icon="globe-alt" class="text-primary-500"></Button>
     <template #menu>
       <DropdownMenu>
         <template v-for="(value,key) in langs">
