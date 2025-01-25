@@ -1,44 +1,43 @@
-
 ## A Laravel Nova Tool to add language switcher to your application
+
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/badinansoft/nova-language-switch.svg?style=flat-square)](https://packagist.org/packages/badinansoft/nova-language-switch)
 [![Total Downloads](https://img.shields.io/packagist/dt/badinansoft/nova-language-switch.svg?style=flat-square)](https://packagist.org/packages/badinansoft/nova-language-switch)
 
-This [Nova](https://nova.laravel.com) tool lets you:
-  - Add a Language switcher to the header of the nova application.
-  - Handle Switch language and put the current locale to Laravel cache to remember language from multiple browsers.
-  - Switch the direction of the application based on the RTL-supported application written in config.
- 
- ## Requirements
-  - `php: >=8.0`
-  - `laravel/nova: ^4.0`
-  
-	> 	   Note: This package dose't work with nova 3
+This [Nova](https://nova.laravel.com) tool allows you to:
+- Add a language switcher to the header of the Nova application
+- Handle language switching and cache the current locale across multiple browsers
+- Switch the application direction for RTL-supported languages
+
+## Requirements
+- PHP: >=8.0
+- Laravel Nova: ^4.0|^5.0
+
+> **Note**: This package is not compatible with Nova 3
 
 ## Features
-- Add multiple languages from the config.
-- Remember set local based on cache no need to save in the database table
--  Auto inject to the header of the application 
-- Just 4 steps to setup
+- Add multiple languages from the configuration
+- Remember locale settings using cache (no database table required)
+- Auto-inject language switcher to the application header
+- Easy 4-step setup
 
-## Screenshot
-|![enter image description here](https://raw.githubusercontent.com/badinansoft/nova-language-switch/master/docs/en-screenshot.png)  |![enter image description here](https://raw.githubusercontent.com/badinansoft/nova-language-switch/master/docs/ar-screenshot.png) |
-
+## Screenshots
+| English | Arabic |
+|---------|--------|
+| ![English Screenshot](https://raw.githubusercontent.com/badinansoft/nova-language-switch/master/docs/en-screenshot.png) | ![Arabic Screenshot](https://raw.githubusercontent.com/badinansoft/nova-language-switch/master/docs/ar-screenshot.png) |
 
 ## Installation
 
-You can install the nova tool in to a Laravel app that uses [Nova](https://nova.laravel.com) via composer:
+Install the Nova tool via Composer:
 
 ```bash
 composer require badinansoft/nova-language-switch
 ```
 
-Next up, you must register the tool with Nova. This is typically done in the `tools` method of the `NovaServiceProvider`.
-  
+### Laravel 10 and Earlier
+
+Register the tool in `app/Providers/NovaServiceProvider.php`:
+
 ```php
-// in app/Providers/NovaServiceProvider.php
-
-// ...
-
 public function tools()
 {
     return [
@@ -48,65 +47,78 @@ public function tools()
 }
 ```
 
+Register the middleware in `app/Http/Kernel.php`:
 
-Next up,  must you publish the config file with for add your languages:
+```php
+protected $middlewareGroups = [
+    'web' => [
+        // ...
+        \Badinansoft\LanguageSwitch\Http\Middleware\LanguageSwitch::class
+    ],
+];
+```
+
+### Laravel 11
+
+Register the tool in `app/Providers/NovaServiceProvider.php` (same as Laravel 10):
+
+```php
+public function tools()
+{
+    return [
+        // ...
+        new \Badinansoft\LanguageSwitch\LanguageSwitch(),
+    ];
+}
+```
+
+Register the middleware in `bootstrap/app.php`:
+
+```php
+->withMiddleware(function (Middleware $middleware) {
+    $middleware->web(append: [
+        \Badinansoft\LanguageSwitch\Http\Middleware\LanguageSwitch::class,
+    ]);
+})
+```
+
+Publish the configuration file:
+
 ```bash
 php artisan vendor:publish --provider="Badinansoft\LanguageSwitch\ToolServiceProvider" --tag="config"
 ```
 
-This is the contents of the published config file:
+### Configuration
+
+Edit the published config file (`config/language-switch.php`):
 
 ```php
+return [
+    /**
+     * Supported languages for your application
+     * @var array<string, string>
+     */
+    'supported-languages' => [
+        'en' => 'English',
+        'ar' => 'Arabic',
+        // Add or remove languages as needed
+    ],
 
-<?php  
-  
-return [  
-  
-	/**  
-	 * List of languages that your application supports 
-	 * array <string,  string>  
-	 */  
-	 'supported-languages' => [  
-		  'en' => 'English',  
-		  'ar' => 'Arabic',  
-		  //here you can add new lanaguage or remove language that you need by 'local'=>'Label'
-	 ],  
-  
-	/**  
-	 * Languages That need RTL support 
-	 *  string 
-	 * */  
-	'rtl-languages' => [  
-		  'ar'  
-		  //here put that language that need support RTL just put local of the language like this example for arabic 
-		 
-	 ],  
-  
+    /**
+     * Languages that require RTL support
+     * @var array<string>
+     */
+    'rtl-languages' => [
+        'ar'
+        // Add other RTL language codes
+    ],
 ];
-```
-
-
-Finally you should register middleware This is typically done in the `$middlewareGroups` property of the `Http/Kernel` in **web** group.
- 
- ```php
-	/**  
-	*  The application's route middleware groups. 
-	*  @var array<string, array<int, class-string|string>>  
-	*/  
-	protected $middlewareGroups = [  
-	  'web' => [  
-			  //...
-			  \Badinansoft\LanguageSwitch\Http\Middleware\LanguageSwitch::class  
-	  ],
-	  //...
-	];
 ```
 
 ## Credits
 
 - [Shahab Zebari](https://github.com/shahabzebare)
 - [All Contributors](../../contributors)
- 
 
 ## License
 
